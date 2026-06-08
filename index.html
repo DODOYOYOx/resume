@@ -1,0 +1,814 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>李正一 - HTML 简历</title>
+  <style>
+    :root {
+      --bg: #faf9f4;
+      --ink: #1f1d19;
+      --muted: #706c63;
+      --line: rgba(31, 29, 25, 0.12);
+      --soft: rgba(31, 29, 25, 0.045);
+      --card: #fffefa;
+      --mark: #d7ff5f;
+      --green: #3fd06f;
+      --radius: 4px;
+      --serif: Georgia, "Times New Roman", "Songti SC", "SimSun", serif;
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: var(--sans);
+      line-height: 1.62;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.035;
+      z-index: 10;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .shell {
+      position: relative;
+      max-width: 1320px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-left: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      background:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px),
+        var(--bg);
+      background-size: 100% 96px, 96px 100%;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      min-height: 64px;
+      padding: 0 32px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(250, 249, 244, 0.82);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .brand::before {
+      content: "";
+      width: 32px;
+      height: 1px;
+      background: rgba(31, 29, 25, 0.35);
+    }
+
+    .nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .nav a {
+      padding: 6px 9px;
+      border: 1px solid transparent;
+    }
+
+    .nav a:hover {
+      border-color: var(--line);
+      background: rgba(255, 255, 255, 0.42);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 680px;
+      display: grid;
+      align-items: center;
+      padding: 96px 48px 132px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-visual {
+      position: absolute;
+      right: -120px;
+      top: 80px;
+      width: 560px;
+      height: 560px;
+      opacity: 0.38;
+      pointer-events: none;
+    }
+
+    .hero-visual svg {
+      width: 100%;
+      height: 100%;
+      color: var(--ink);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 980px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 28px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 13px;
+    }
+
+    .eyebrow::before,
+    .section-kicker::before,
+    .section-kicker::after {
+      content: "";
+      width: 32px;
+      height: 1px;
+      background: rgba(31, 29, 25, 0.35);
+    }
+
+    h1 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(4.8rem, 13vw, 12rem);
+      line-height: 0.86;
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+
+    .hero-title span {
+      display: block;
+    }
+
+    .name-mark {
+      position: relative;
+      display: inline-block;
+    }
+
+    .name-mark::after {
+      content: "";
+      position: absolute;
+      left: 0.03em;
+      right: 0;
+      bottom: 0.07em;
+      height: 0.14em;
+      background: var(--mark);
+      z-index: -1;
+    }
+
+    .hero-bottom {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 420px;
+      gap: 48px;
+      align-items: end;
+      margin-top: 54px;
+    }
+
+    .position {
+      max-width: 680px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 22px;
+      line-height: 1.58;
+    }
+
+    .contact-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      border: 1px solid var(--line);
+      background: var(--line);
+    }
+
+    .contact-item {
+      min-height: 86px;
+      padding: 16px;
+      background: rgba(250, 249, 244, 0.88);
+    }
+
+    .label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .value {
+      font-size: 15px;
+      font-weight: 650;
+    }
+
+    .marquee {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 34px;
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(250, 249, 244, 0.78);
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      gap: 48px;
+      padding: 14px 0;
+      animation: marquee 26s linear infinite;
+      white-space: nowrap;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .marquee b {
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 500;
+      vertical-align: middle;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .section {
+      padding: 92px 48px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(250, 249, 244, 0.72);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 0.75fr 1.25fr;
+      gap: 42px;
+      align-items: end;
+      margin-bottom: 44px;
+    }
+
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 13px;
+    }
+
+    h2 {
+      margin: 14px 0 0;
+      font-family: var(--serif);
+      font-size: clamp(2.6rem, 5vw, 5.8rem);
+      line-height: 0.94;
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+
+    .section-note {
+      margin: 0;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      border: 1px solid var(--line);
+      background: var(--line);
+    }
+
+    .about-card {
+      min-height: 270px;
+      padding: 28px;
+      background: var(--card);
+    }
+
+    .num {
+      display: block;
+      margin-bottom: 34px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 13px;
+    }
+
+    .about-card h3,
+    .experience-title h3,
+    .side-card h3 {
+      margin: 0 0 14px;
+      font-size: 21px;
+      line-height: 1.3;
+      letter-spacing: 0;
+    }
+
+    .about-card p,
+    .side-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .experience-stack {
+      display: grid;
+      gap: 20px;
+    }
+
+    .experience {
+      display: grid;
+      grid-template-columns: 310px 1fr;
+      gap: 1px;
+      border: 1px solid var(--line);
+      background: var(--line);
+    }
+
+    .experience-title,
+    .experience-body {
+      background: var(--card);
+      padding: 26px;
+    }
+
+    .time {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
+    .time::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--green);
+      box-shadow: 0 0 0 4px rgba(63, 208, 111, 0.15);
+    }
+
+    .role {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
+    .task-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .task {
+      min-height: 142px;
+      padding: 18px;
+      background: #fffefa;
+    }
+
+    .task strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+
+    .task span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      border: 1px solid var(--line);
+      background: var(--line);
+      margin-bottom: 28px;
+    }
+
+    .metric {
+      padding: 28px;
+      background: var(--card);
+    }
+
+    .metric b {
+      display: block;
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 5vw, 4.8rem);
+      line-height: 0.95;
+      font-weight: 500;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .tool {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 76px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255, 254, 250, 0.78);
+      transition: transform .25s ease, border-color .25s ease, background .25s ease;
+    }
+
+    .tool:hover {
+      transform: translateY(-3px);
+      border-color: rgba(31, 29, 25, 0.28);
+      background: #fffefa;
+    }
+
+    .icon {
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(31, 29, 25, 0.16);
+      border-radius: var(--radius);
+      background: var(--soft);
+      color: var(--ink);
+    }
+
+    .icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .tool-name {
+      display: block;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .tool-kind {
+      display: block;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    .side-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      border: 1px solid var(--line);
+      background: var(--line);
+    }
+
+    .side-card {
+      min-height: 220px;
+      padding: 28px;
+      background: var(--card);
+    }
+
+    .mini-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .mini-list span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      background: var(--soft);
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--ink);
+    }
+
+    @media (max-width: 980px) {
+      .topbar { position: relative; padding: 0 22px; }
+      .nav { display: none; }
+      .hero { min-height: auto; padding: 72px 24px 108px; }
+      .hero-visual { width: 380px; height: 380px; right: -160px; top: 100px; }
+      .hero-bottom,
+      .section-head,
+      .experience,
+      .side-grid {
+        grid-template-columns: 1fr;
+      }
+      .contact-panel,
+      .about-grid,
+      .metrics-grid,
+      .tool-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .task-grid {
+        grid-template-columns: 1fr;
+      }
+      .section { padding: 68px 24px; }
+    }
+
+    @media (max-width: 620px) {
+      .shell { border: 0; }
+      h1 { font-size: 4.9rem; }
+      .position { font-size: 18px; }
+      .contact-panel,
+      .about-grid,
+      .metrics-grid,
+      .tool-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-bottom { gap: 30px; }
+      .about-card,
+      .metric,
+      .side-card,
+      .experience-title,
+      .experience-body { padding: 22px; }
+      .marquee b { font-size: 22px; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      body::before,
+      .topbar,
+      .hero-visual,
+      .marquee { display: none; }
+      .shell {
+        max-width: none;
+        border: 0;
+        background: #fff;
+      }
+      .hero,
+      .section {
+        padding: 24px 0;
+        border-bottom: 1px solid #ddd;
+      }
+      .hero { min-height: auto; }
+      h1 { font-size: 72px; }
+      h2 { font-size: 38px; }
+      .task,
+      .about-card,
+      .metric,
+      .side-card,
+      .experience-title,
+      .experience-body,
+      .tool,
+      .contact-item {
+        background: #fff;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <nav class="topbar" aria-label="页面导航">
+      <span class="brand">Resume / AI-enabled management</span>
+      <div class="nav">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 520 520">
+          <circle cx="260" cy="260" r="178" fill="none" stroke="currentColor" stroke-width="1" opacity=".28"/>
+          <circle cx="260" cy="260" r="118" fill="none" stroke="currentColor" stroke-width="1" opacity=".18"/>
+          <ellipse cx="260" cy="260" rx="212" ry="74" fill="none" stroke="currentColor" stroke-width="1" opacity=".2"/>
+          <ellipse cx="260" cy="260" rx="74" ry="212" fill="none" stroke="currentColor" stroke-width="1" opacity=".2"/>
+          <path d="M86 260c60-54 119-80 174-80s114 26 174 80c-60 54-119 80-174 80S146 314 86 260Z" fill="none" stroke="currentColor" stroke-width="1" opacity=".22"/>
+          <circle cx="260" cy="260" r="10" fill="currentColor" opacity=".38"/>
+        </svg>
+      </div>
+
+      <div class="hero-content">
+        <p class="eyebrow">OPEN TO COMPREHENSIVE MANAGEMENT / OPERATIONS ROLES</p>
+        <h1 class="hero-title">
+          <span>李正一</span>
+          <span><span class="name-mark">Resume</span></span>
+        </h1>
+        <div class="hero-bottom">
+          <p class="position">AI 赋能型综合管理人才，具备国企及集团型企业事业部管理、经营分析、文稿宣传与招采合同协同经验。</p>
+          <div class="contact-panel" aria-label="核心联系方式">
+            <div class="contact-item"><span class="label">Phone</span><span class="value"><a href="tel:15687629091">15687629091</a></span></div>
+            <div class="contact-item"><span class="label">Age</span><span class="value">27</span></div>
+            <div class="contact-item"><span class="label">Certificate</span><span class="value">助理工程师</span></div>
+            <div class="contact-item"><span class="label">Major</span><span class="value">风景园林</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <span><b>30+</b> 月度可采用报告/文本材料</span>
+          <span><b>5%</b> 本科专业排名前列</span>
+          <span><b>2</b> 段综合管理工作经历</span>
+          <span><b>AI</b> 资料归纳 / 初稿生成 / 流程沉淀</span>
+          <span><b>30+</b> 月度可采用报告/文本材料</span>
+          <span><b>5%</b> 本科专业排名前列</span>
+          <span><b>2</b> 段综合管理工作经历</span>
+          <span><b>AI</b> 资料归纳 / 初稿生成 / 流程沉淀</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="section" id="about">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">ABOUT</span>
+          <h2>关于我</h2>
+        </div>
+        <p class="section-note">用理工背景理解流程，用综合管理经验推动协同，用 AI 工具处理重复事务与知识沉淀。</p>
+      </div>
+
+      <div class="about-grid">
+        <article class="about-card">
+          <span class="num">01 / Education</span>
+          <h3>结构化思维与跨专业理解</h3>
+          <p>风景园林本科背景，学习景观设计、工程造价、工程管理、生态学与环境心理学等课程，本科期间专业排名前 5%，曾任校新闻部副部长。</p>
+        </article>
+        <article class="about-card">
+          <span class="num">02 / Management</span>
+          <h3>综合管理与事项闭环</h3>
+          <p>熟悉事业部日常运营、项目协同、合同资料、经营数据、报告材料、品牌宣传与跨部门沟通，能够在多事项并行场景中推进任务拆解和过程跟踪。</p>
+        </article>
+        <article class="about-card">
+          <span class="num">03 / AI Workflow</span>
+          <h3>AI 嵌入真实业务流程</h3>
+          <p>将 AI 工具用于资料收集、结构化归纳、报告初稿、人工审核、结果沉淀等环节，提升重复性事务处理效率、知识复用能力和内容产出质量。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">EXPERIENCE</span>
+          <h2>工作经历</h2>
+        </div>
+      </div>
+
+      <div class="experience-stack">
+        <article class="experience">
+          <div class="experience-title">
+            <span class="time">2023.09-2024.12</span>
+            <h3>四川九州集团-科瑞软件</h3>
+            <span class="role">综合管理</span>
+          </div>
+          <div class="experience-body">
+            <div class="task-grid">
+              <div class="task"><strong>流程优化</strong><span>跟踪销售签约、合同风险、履约交付与后续回款，参与制度拟制、修改、下发与宣贯。</span></div>
+              <div class="task"><strong>资料与内审</strong><span>负责合同和过程资料归档、会议纪要、销售发票开具及财务内审协助。</span></div>
+              <div class="task"><strong>经营分析</strong><span>完成月度、季度、年度销售指标统计报表及报告编写，形成汇报口径。</span></div>
+              <div class="task"><strong>组织协调</strong><span>制定外部组织活动计划，推动活动方案、执行流程、分工清单与复盘要点落地。</span></div>
+              <div class="task"><strong>AI 辅助沉淀</strong><span>使用 AI 归纳会议内容、合同节点、内审关注点和经营摘要，提升检索与复盘效率。</span></div>
+              <div class="task"><strong>工作方法</strong><span>形成“任务拆解-过程跟踪-风险提示-结果复盘”的辅助管理方式。</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="experience">
+          <div class="experience-title">
+            <span class="time">2025.01-2025.08</span>
+            <h3>成都高新区社事投资发展有限公司</h3>
+            <span class="role">综合管理</span>
+          </div>
+          <div class="experience-body">
+            <div class="task-grid">
+              <div class="task"><strong>项目协同</strong><span>负责事业部与各板块沟通协调，梳理会议纪要、问题清单、任务节点和跟进台账。</span></div>
+              <div class="task"><strong>经营报告</strong><span>搭建项目数据收集框架，完成数据口径归纳、异常项初筛和报告初稿撰写。</span></div>
+              <div class="task"><strong>文稿提效</strong><span>通过 AI Workflow 每月完成可采用的报告、汇报及文本类材料 30+。</span></div>
+              <div class="task"><strong>品牌宣传</strong><span>负责“今福蓉”公众号运营、活动报道、推文文案、品牌口径与线下活动物料。</span></div>
+              <div class="task"><strong>招采合同</strong><span>负责新项目及日常经营招采全流程，梳理资料清单、合同风险与审计关注点。</span></div>
+              <div class="task"><strong>AI 落地</strong><span>沉淀“资料收集-结构化归纳-初稿生成-人工审核-结果沉淀”的业务工作流。</span></div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">SKILLS & TOOLS</span>
+          <h2>技能和工具</h2>
+        </div>
+        <p class="section-note">持续追踪主流AI工具，高效学习应用</p>
+      </div>
+
+      <div class="metrics-grid" aria-label="能力强度概览">
+        <div class="metric"><b>90%</b><span>综合管理与跨部门协同</span></div>
+        <div class="metric"><b>88%</b><span>文稿撰写与材料输出</span></div>
+        <div class="metric"><b>86%</b><span>经营数据与报告分析</span></div>
+        <div class="metric"><b>85%</b><span>AI 工具与工作流应用</span></div>
+      </div>
+
+      <div class="tool-grid">
+        <div class="tool"><span class="icon"><svg viewBox="0 0 24 24"><path d="M4 7h16M7 4v16M17 4v16M4 17h16"/></svg></span><span><span class="tool-name">跨部门协同</span><span class="tool-kind">Management</span></span></div>
+        <div class="tool"><span class="icon"><svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16M8 16v-5M12 16V8M16 16v-8"/></svg></span><span><span class="tool-name">经营数据分析</span><span class="tool-kind">Reporting</span></span></div>
+        <div class="tool"><span class="icon"><svg viewBox="0 0 24 24"><path d="M7 3h7l3 3v15H7z"/><path d="M14 3v4h4M9 11h6M9 15h6"/></svg></span><span><span class="tool-name">报告与汇报材料</span><span class="tool-kind">Writing</span></span></div>
+        <div class="tool"><span class="icon"><svg viewBox="0 0 24 24"><path d="M7 10V7a5 5 0 0 1 10 0v3"/><rect x="5" y="10" width="14" height="11" rx="2"/></svg></span><span><span class="tool-name">招采合同合规</span><span class="tool-kind">Compliance</span></span></div>
+        <div class="tool"><span class="icon"><svg viewBox="0 0 24 24"><path d="M4 11v6a2 2 0 0 0 2 2h2l8 3V2L8 5H6a2 2 0 0 0-2 2v4z"/><path d="M19 8a4 4 0 0 1 0 8"/></svg></span><span><span class="tool-name">品牌宣传运营</span><span class="tool-kind">Content</span></span></div>
+        <div class="tool"><span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M19.1 4.9l-2.8 2.8M7.7 16.3l-2.8 2.8"/></svg></span><span><span class="tool-name">AI Workflow</span><span class="tool-kind">Automation</span></span></div>
+        <div class="tool"><span class="icon"><svg viewBox="0 0 24 24"><path d="M12 3a7 7 0 0 0-7 7v2a7 7 0 0 0 14 0v-2a7 7 0 0 0-7-7Z"/><path d="M9 14s1 2 3 2 3-2 3-2M9 9h.01M15 9h.01"/></svg></span><span><span class="tool-name">Agent / RAG</span><span class="tool-kind">AI Product</span></span></div>
+        <div class="tool"><span class="icon"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M4 9h16M8 13h3M8 16h8"/></svg></span><span><span class="tool-name">办公与设计软件</span><span class="tool-kind">Office / Design</span></span></div>
+        <div class="tool"><span class="icon"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span><span><span class="tool-name">流程梳理</span><span class="tool-kind">Process</span></span></div>
+        <div class="tool"><span class="icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><span><span class="tool-name">任务闭环</span><span class="tool-kind">Execution</span></span></div>
+        <div class="tool"><span class="icon"><svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg></span><span><span class="tool-name">会议纪要归纳</span><span class="tool-kind">Documentation</span></span></div>
+        <div class="tool"><span class="icon"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6z"/><path d="M9 12l2 2 4-5"/></svg></span><span><span class="tool-name">风险提示</span><span class="tool-kind">Review</span></span></div>
+      </div>
+    </section>
+
+    <section class="section" id="education">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">EDUCATION</span>
+          <h2>教育与证书</h2>
+        </div>
+      </div>
+      <div class="side-grid">
+        <article class="side-card">
+          <span class="num">2018.09-2022.07</span>
+          <h3>西南林业大学</h3>
+          <p>风景园林 | 本科。主修景观设计、工程造价、工程管理、生态学、环境心理学等课程。</p>
+          <div class="mini-list">
+            <span><i class="dot"></i>专业排名前 5%</span>
+            <span><i class="dot"></i>校新闻部副部长</span>
+            <span><i class="dot"></i>优秀毕业设计</span>
+          </div>
+        </article>
+        <article class="side-card">
+          <span class="num">CERTIFICATE / FOCUS</span>
+          <h3>助理工程师（风景园林）</h3>
+          <p>关注 Agent、RAG、工作流、多 Agent 协作等智能体产品形态，理解其在企业知识管理、流程自动化、资料检索和业务复盘中的应用价值。</p>
+          <div class="mini-list">
+            <span><i class="dot"></i>企业知识管理</span>
+            <span><i class="dot"></i>流程自动化</span>
+            <span><i class="dot"></i>业务复盘</span>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
